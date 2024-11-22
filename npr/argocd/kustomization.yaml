@@ -1,0 +1,37 @@
+helmCharts:
+  - includeCRDs: true
+    name: argo-cd
+    namespace: argocd
+    releaseName: argocd
+    repo: https://argoproj.github.io/argo-helm
+    version: 7.7.5
+    valuesInline:
+      applicationSet:
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+      controller:
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+      dex:
+        enabled: false
+      notifications:
+        enabled: false
+      redis:
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+      repoServer:
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+      server:
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
