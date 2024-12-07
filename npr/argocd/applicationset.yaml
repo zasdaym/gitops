@@ -10,6 +10,7 @@ spec:
           - path: npr/*
         repoURL: https://github.com/zasdaym/gitops.git
         revision: HEAD
+  goTemplate: true
   template:
     metadata:
       name: '{{.path.basename}}'
@@ -17,7 +18,6 @@ spec:
       destination:
         namespace: '{{.path.basename}}'
         server: https://kubernetes.default.svc
-      goTemplate: true
       project: default
       source:
         path: '{{.path.path}}'
