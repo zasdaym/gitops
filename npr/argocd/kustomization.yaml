@@ -1,3 +1,4 @@
+namespace: argocd
 resources:
   - namespace.yaml
   - applicationset.yaml
@@ -18,6 +19,7 @@ helmCharts:
         cm:
           create: true
           kustomize.buildOptions: --enable-helm
+          url: https://argocd.zasdaym.my.id
       controller:
         resources:
           requests:
