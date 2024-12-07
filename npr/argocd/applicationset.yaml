@@ -24,5 +24,6 @@ spec:
         repoURL: https://github.com/zasdaym/gitops.git
         targetRevision: HEAD
       syncPolicy:
+        automated: {}
         syncOptions:
           - CreatedNamespace=true
