@@ -17,6 +17,7 @@ spec:
       destination:
         namespace: '{{.path.basename}}'
         server: https://kubernetes.default.svc
+      goTemplate: true
       project: default
       source:
         path: '{{.path.path}}'
