@@ -1,3 +1,5 @@
+resources:
+  - namespace.yaml
 helmCharts:
   - includeCRDs: true
     name: argo-cd
