@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: gitops
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/zasdaym/gitops.git
+        directories:
+          - path: npr/*
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      source:
+        repoURL: https://github.com/zasdaym/gitops.git
+        path: '{{.path.path}}'
+      syncPolicy:
+        syncOptions:
+          - CreatedNamespace=true
