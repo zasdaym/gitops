@@ -1,0 +1,10 @@
+namespace: bar-dev
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: bar-dev
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
