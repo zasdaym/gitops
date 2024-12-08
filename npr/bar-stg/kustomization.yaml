@@ -1,0 +1,11 @@
+namespace: bar-stg
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: bar-stg
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
