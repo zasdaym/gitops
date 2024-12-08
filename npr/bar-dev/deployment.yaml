@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: bar-dev
-          image: mendhak-http-https-echo:31
+          image: mendhak/http-https-echo:31
           resources:
             requests:
               cpu: 100m
