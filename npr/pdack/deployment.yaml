@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: pdack
-          image: ghcr.io/zasdaym/pdack:v1.0.3
+          image: ghcr.io/zasdaym/pdack:v1.0.5
           envFrom:
             - configMapRef:
                 name: pdack
