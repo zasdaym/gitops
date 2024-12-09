@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdack
+spec:
+  template:
+    spec:
+      containers:
+        - name: pdack
+          image: ghcr.io/zasdaym/pdack:v1.0.1
+          envFrom:
+            - configMapRef:
+                name: pdack
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+      imagePullSecrets:
+        - name: github
