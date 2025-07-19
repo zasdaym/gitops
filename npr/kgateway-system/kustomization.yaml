@@ -1,0 +1,16 @@
+namespace: kgateway-system
+resources:
+  - crd.yaml
+helmCharts:
+  - includeCRDs: true
+    name: kgateway-crds
+    namespace: kgateway-system
+    releaseName: kgateway-crds
+    repo: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway-crds
+    version: v2.0.3
+  - includeCRDs: true
+    name: kgateway
+    namespace: kgateway-system
+    releaseName: kgateway
+    repo: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway-crds
+    version: v2.0.3
