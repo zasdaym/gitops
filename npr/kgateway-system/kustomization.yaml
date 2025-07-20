@@ -3,3 +3,4 @@ resources:
   - gateway-crd.yaml
   - kgateway-crds.yaml
   - kgateway.yaml
+  - gateway.yaml
