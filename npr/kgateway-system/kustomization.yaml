@@ -1,0 +1,5 @@
+resources:
+  - namespace.yaml
+  - gateway-crd.yaml
+  - kgateway-crds.yaml
+  - kgateway.yaml
