@@ -5,14 +5,10 @@ metadata:
   namespace: kgateway-system
 spec:
   interval: 5m
-  chart:
-    spec:
-      chart: kgateway
-      version: v2.0.3
-      sourceRef:
-        kind: OCIRepository
-        name: kgateway
-        namespace: kgateway-system
+  chartRef:
+    kind: OCIRepository
+    name: kgateway
+    namespace: kgateway-system
   install:
     crds: Create
   upgrade:
