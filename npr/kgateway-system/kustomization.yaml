@@ -1,6 +1,5 @@
 resources:
   - namespace.yaml
   - gateway-crd.yaml
-  - ocirepository.yaml
-  - helmrelease-crds.yaml
-  - helmrelease.yaml
+  - kgateway-crds.yaml
+  - kgateway.yaml
