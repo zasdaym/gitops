@@ -12,7 +12,7 @@ spec:
         paths:
           - backend:
               service:
-                name: web.maybe.svc.cluster.local
+                name: web
                 port:
                   number: 80
             path: /
