@@ -1,0 +1,11 @@
+namespace: bar-new
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: bar-new
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
