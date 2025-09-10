@@ -17,7 +17,7 @@ spec:
           image: victoriametrics/victoria-metrics:v1.125.1
           args:
             - "--storageDataPath=/storage"
-            - "--retentionPeriod=1m"
+            - "--retentionPeriod=31d"
           ports:
             - containerPort: 8428
               name: http
