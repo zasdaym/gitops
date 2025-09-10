@@ -1,0 +1,10 @@
+namespace: victorialogs
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: victorialogs
+resources:
+  - namespace.yaml
+  - statefulset.yaml
+  - service.yaml
