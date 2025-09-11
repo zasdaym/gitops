@@ -146,6 +146,7 @@ beyla.ebpf "default" {
   discovery {
     services {
       kubernetes {
+        namespace = "."
       }
     }
   }
