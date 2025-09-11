@@ -13,7 +13,6 @@ spec:
         app: alloy
     spec:
       serviceAccountName: alloy
-      hostPID: true
       containers:
       - name: alloy
         image: grafana/alloy:v1.10.2
@@ -61,4 +60,4 @@ spec:
         hostPath:
           path: /var/lib/docker/containers
       hostNetwork: false
-      hostPID: false
+      hostPID: true
