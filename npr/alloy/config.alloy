@@ -1,3 +1,7 @@
+livedebugging {
+  enabled = true
+}
+
 logging {
   level  = "info"
   format = "logfmt"
@@ -135,7 +139,6 @@ loki.write "victorialogs" {
 
 beyla.ebpf "default" {
   debug = true
-  trace_printer = "text"
 
   attributes {
     kubernetes {
@@ -146,15 +149,9 @@ beyla.ebpf "default" {
   discovery {
     services {
       kubernetes {
-        namespace = "."
+        namespace = "ingress-nginx"
       }
     }
-  }
-
-  metrics {
-    features = [
-      "application",
-    ]
   }
 
   output {
