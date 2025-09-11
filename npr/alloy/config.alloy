@@ -155,13 +155,13 @@ beyla.ebpf "default" {
   }
 
   output {
-    traces = [otelcol.exporter.otlp.victoriatraces.input]
+    traces = [otelcol.exporter.otlphttp.victoriatraces.input]
   }
 }
 
-otelcol.exporter.otlp "victoriatraces" {
+otelcol.exporter.otlphttp "victoriatraces" {
   client {
-    endpoint = "victoriatraces.victoriatraces.svc.cluster.local:10428"
+    endpoint = "http://victoriatraces.victoriatraces.svc.cluster.local:10428/insert/opentelemetry"
 
     tls {
       insecure = true
