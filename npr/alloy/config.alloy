@@ -162,5 +162,10 @@ beyla.ebpf "default" {
 otelcol.exporter.otlp "victoriatraces" {
   client {
     endpoint = "victoriatraces.victoriatraces.svc.cluster.local:10428"
+
+    tls {
+      insecure = true
+      insecure_skip_verify = true
+    }
   }
 }
