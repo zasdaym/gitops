@@ -146,8 +146,6 @@ beyla.ebpf "default" {
   discovery {
     services {
       kubernetes {
-        namespace = "ingress-nginx"
-        deployment_name = "."
       }
     }
   }
