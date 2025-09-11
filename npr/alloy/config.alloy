@@ -20,27 +20,56 @@ discovery.relabel "pod_logs" {
     regex         = "Pending|Succeeded|Failed|Unknown"
     action        = "drop"
   }
+
   rule {
     source_labels = ["__meta_kubernetes_pod_container_name"]
     target_label  = "container"
   }
+
   rule {
     source_labels = ["__meta_kubernetes_pod_name"]
     target_label  = "pod"
   }
+
   rule {
     source_labels = ["__meta_kubernetes_namespace"]
     target_label  = "namespace"
   }
+
   rule {
     source_labels = ["__meta_kubernetes_pod_node_name"]
     target_label  = "node"
   }
+
+  rule {
+    source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+    separator     = "/"
+    target_label  = "__path__"
+    replacement   = "/var/log/pods/*$1/*.log"
+  }
+
+  rule {
+    source_labels = ["__meta_kubernetes_pod_annotationpresent_kubernetes_io_config_hash", "__meta_kubernetes_pod_annotation_kubernetes_io_config_hash", "__meta_kubernetes_pod_container_name"]
+    separator     = "/"
+    regex         = "true/(.*)"
+    target_label  = "__path__"
+    replacement   = "/var/log/pods/*$1/*.log"
+  }
 }
 
-loki.source.kubernetes "pod_logs" {
-  targets    = discovery.relabel.pod_logs.output
+local.file_match "kubernetes_pods" {
+  path_targets = discovery.relabel.pod_logs.output
+}
+
+loki.source.file "pod_logs" {
+  targets    = local.file_match.kubernetes_pods.targets
+  forward_to = [loki.process.kubernetes_pods.receiver]
+}
+
+loki.process "kubernetes_pods" {
   forward_to = [loki.write.victorialogs.receiver]
+
+  stage.cri { }
 }
 
 discovery.relabel "pod_metrics" {
@@ -100,4 +129,6 @@ loki.write "victorialogs" {
   endpoint {
     url = "http://victorialogs.victorialogs.svc.cluster.local:9428/insert/loki/api/v1/push"
   }
+
+  external_labels = {}
 }
