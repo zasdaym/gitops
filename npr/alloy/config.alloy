@@ -132,3 +132,31 @@ loki.write "victorialogs" {
 
   external_labels = {}
 }
+
+beyla.ebpf "default" {
+  attributes {
+    kubernetes {
+      enable = "true"
+    }
+  }
+
+  discovery {
+    service {
+      kubernetes {
+        namespace = "ingress-nginx"
+      }
+    }
+  }
+
+  metrics {
+    features = [
+      "application",
+    ]
+  }
+}
+
+prometheus.scrape "beyla" {
+  targets = beyla.ebpf.default.targets
+  honor_labels = true
+  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+}
