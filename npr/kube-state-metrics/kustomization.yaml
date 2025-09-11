@@ -1,6 +1,4 @@
 namespace: kube-state-metrics
 resources:
   - namespace.yaml
-  - github.com/kubernetes/kube-state-metrics/examples/standard?ref=release-2.17
-patchesStrategicMerge:
-  - deployment-patch.yaml
+  - helm.yaml
