@@ -39,6 +39,9 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
+        - name: cgroup
+          mountPath: /sys/fs/cgroup
+          readOnly: true
         securityContext:
           privileged: true
           runAsUser: 0
@@ -58,5 +61,8 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-      hostNetwork: false
+      - name: cgroup
+        hostPath:
+          path: /sys/fs/cgroup
+      hostNetwork: true
       hostPID: true
