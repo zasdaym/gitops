@@ -161,6 +161,6 @@ beyla.ebpf "default" {
 
 otelcol.exporter.otlp "victoriatraces" {
   client {
-    endpoint = "victoriatraces.victoriatraces.svc.cluster.local:10428/insert/opentelemetry/v1/traces"
+    endpoint = "victoriatraces.victoriatraces.svc.cluster.local:10428"
   }
 }
