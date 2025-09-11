@@ -64,5 +64,5 @@ spec:
       - name: cgroup
         hostPath:
           path: /sys/fs/cgroup
-      hostNetwork: true
+      hostNetwork: false
       hostPID: true
