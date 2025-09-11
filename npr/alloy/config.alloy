@@ -144,6 +144,7 @@ beyla.ebpf "default" {
     service {
       kubernetes {
         namespace = "ingress-nginx"
+        deployment_name = "."
       }
     }
   }
@@ -153,10 +154,14 @@ beyla.ebpf "default" {
       "application",
     ]
   }
+
+  output {
+    traces = [otelcol.exporter.otlp.victoriatraces.input]
+  }
 }
 
-prometheus.scrape "beyla" {
-  targets = beyla.ebpf.default.targets
-  honor_labels = true
-  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+otelcol.exporter.otlp "victoriatraces" {
+  client {
+    endpoint = "victoriatraces.victoriatraces.svc.cluster.local:10428"
+  }
 }

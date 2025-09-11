@@ -40,6 +40,8 @@ spec:
           mountPath: /var/lib/docker/containers
           readOnly: true
         securityContext:
+          appArmorProfile:
+            type: Unconfined
           privileged: true
           runAsUser: 0
         resources:
