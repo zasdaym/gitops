@@ -149,7 +149,7 @@ beyla.ebpf "default" {
   discovery {
     services {
       kubernetes {
-        namespace = "umami"
+        namespace = "ingress-nginx"
       }
     }
   }
