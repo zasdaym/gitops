@@ -21,6 +21,10 @@ spec:
     kind: OCIRepository
     name: kube-state-metrics
   values:
+    podAnnotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "8080"
+      prometheus.io/metrics: "/metrics"
     resources:
       requests:
         cpu: 100m
