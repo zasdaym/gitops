@@ -134,6 +134,9 @@ loki.write "victorialogs" {
 }
 
 beyla.ebpf "default" {
+  debug = true
+  trace_printer = "text"
+
   attributes {
     kubernetes {
       enable = "true"
