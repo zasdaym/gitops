@@ -6,4 +6,5 @@ labels:
       app: pdack
 resources:
   - namespace.yaml
+  - infisicalsecret.yaml
   - cronjob.yaml
