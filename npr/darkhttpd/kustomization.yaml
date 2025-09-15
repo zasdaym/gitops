@@ -1,0 +1,12 @@
+namespace: darkhttpd
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: darkhttpd 
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  - httproute.yaml

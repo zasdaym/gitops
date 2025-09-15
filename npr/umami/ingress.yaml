@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: umami
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: umami.zasdaym.my.id
+      http:
+        paths:
+          - backend:
+              service:
+                name: umami
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

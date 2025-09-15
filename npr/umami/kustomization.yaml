@@ -1,0 +1,11 @@
+namespace: umami
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: umami
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml

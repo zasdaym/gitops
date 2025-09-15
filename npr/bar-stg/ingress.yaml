@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bar-stg
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bar-stg.zasdaym.my.id
+      http:
+        paths:
+          - backend:
+              service:
+                name: bar-stg
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

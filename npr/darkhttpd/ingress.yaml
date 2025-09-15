@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: darkhttpd
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: file.zasdaym.my.id
+      http:
+        paths:
+          - backend:
+              service:
+                name: darkhttpd
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

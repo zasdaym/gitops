@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: darkhttpd
+spec:
+  template:
+    spec:
+      containers:
+        - name: darkhttpd
+          image: p3terx/darkhttpd:1.16
+          args:
+            - /srv/darkhttpd
+            - --no-server-id
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: webroot
+              mountPath: /srv/darkhttpd
+              readOnly: true
+      volumes:
+        - name: webroot
+          hostPath:
+            path: /srv/darkhttpd
+            type: DirectoryOrCreate

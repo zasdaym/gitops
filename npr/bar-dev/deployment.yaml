@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-dev
+spec:
+  template:
+    spec:
+      containers:
+        - name: bar-dev
+          image: mendhak/http-https-echo:31
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 128Mi

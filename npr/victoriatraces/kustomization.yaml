@@ -1,0 +1,10 @@
+namespace: victoriatraces
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: victoriatraces
+resources:
+  - namespace.yaml
+  - statefulset.yaml
+  - service.yaml

@@ -1,0 +1,10 @@
+namespace: postgres
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: postgres
+resources:
+  - namespace.yaml
+  - service.yaml
+  - statefulset.yaml

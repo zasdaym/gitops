@@ -1,0 +1,4 @@
+namespace: kube-state-metrics
+resources:
+  - namespace.yaml
+  - helm.yaml

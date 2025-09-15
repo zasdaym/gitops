@@ -1,0 +1,5 @@
+resources:
+  - gateway-crd.yaml
+  - namespace.yaml
+  - helm.yaml
+  - gateway.yaml

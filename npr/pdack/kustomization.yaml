@@ -1,0 +1,9 @@
+namespace: pdack
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: pdack
+resources:
+  - namespace.yaml
+  - cronjob.yaml

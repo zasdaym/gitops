@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: victoriatraces
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: victoriatraces
+  template:
+    metadata:
+      labels:
+        app: victoriatraces
+    spec:
+      containers:
+        - name: victoriatraces
+          image: victoriametrics/victoria-traces:v0.2.0
+          args:
+            - "-storageDataPath=/storage"
+            - "-retentionPeriod=1w"
+          ports:
+            - containerPort: 9428
+              name: http
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 1Gi
+          volumeMounts:
+            - name: storage
+              mountPath: /storage
+      volumes:
+        - name: storage
+          hostPath:
+            path: /srv/victoriatraces/data
+            type: DirectoryOrCreate

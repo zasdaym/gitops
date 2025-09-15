@@ -1,0 +1,19 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: darkhttpd
+spec:
+  parentRefs:
+    - name: http
+      namespace: nginx-gateway
+  hostnames:
+    - file.zasdaym.my.id
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: darkhttpd
+          port: 80

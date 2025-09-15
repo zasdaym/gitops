@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: worker
+  name: worker
+  namespace: maybe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - image: ghcr.io/maybe-finance/maybe
+        name: worker
+        command:
+          - bundle
+          - exec
+          - sidekiq
+        envFrom:
+          - secretRef:
+              name: maybe
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi

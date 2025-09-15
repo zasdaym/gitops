@@ -1,0 +1,12 @@
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: zasdaym
+  user: admin
+spec:
+  hosts:
+  - ssh:
+      address: srv1.zasdaym.my.id
+      user: root
+    role: "controller+worker"
+    noTaints: true

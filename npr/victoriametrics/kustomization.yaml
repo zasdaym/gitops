@@ -1,0 +1,10 @@
+namespace: victoriametrics
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: victoriametrics
+resources:
+  - namespace.yaml
+  - statefulset.yaml
+  - service.yaml

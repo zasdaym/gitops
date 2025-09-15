@@ -1,0 +1,60 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web
+  namespace: maybe
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: maybe.zasdaym.my.id
+      http:
+        paths:
+          - backend:
+              service:
+                name: web
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: maybe
+spec:
+  type: ClusterIP
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+  namespace: maybe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - image: ghcr.io/maybe-finance/maybe
+        name: web
+        envFrom:
+          - secretRef:
+              name: maybe
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
