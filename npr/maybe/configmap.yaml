@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: maybe
+  namespace: maybe
+data:
+  DB_HOST: postgres.postgres.svc.cluster.local
+  DB_PORT: "5432"
+  POSTGRES_DB: maybe
+  POSTGRES_USER: postgres
+  RAILS_ASSUME_SSL: "false"
+  RAILS_FORCE_SSL: "false"
+  REDIS_URL: redis.redis.svc.cluster.local
+  SELF_HOSTED: "true"
