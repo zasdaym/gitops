@@ -10,6 +10,8 @@ spec:
         - name: umami
           image: ghcr.io/umami-software/umami:postgresql-v2.15.1
           envFrom:
+            - configMapRef:
+                name: umami
             - secretRef:
                 name: umami
           resources:
