@@ -1,9 +1,5 @@
-livedebugging {
-  enabled = true
-}
-
 logging {
-  level  = "info"
+  level  = "error"
   format = "logfmt"
 }
 
@@ -132,40 +128,5 @@ prometheus.remote_write "victoriametrics" {
 loki.write "victorialogs" {
   endpoint {
     url = "http://victorialogs.victorialogs.svc.cluster.local:9428/insert/loki/api/v1/push"
-  }
-
-  external_labels = {}
-}
-
-beyla.ebpf "default" {
-  debug = true
-
-  attributes {
-    kubernetes {
-      enable = "true"
-    }
-  }
-
-  discovery {
-    services {
-      kubernetes {
-        namespace = "ingress-nginx"
-      }
-    }
-  }
-
-  output {
-    traces = [otelcol.exporter.otlphttp.victoriatraces.input]
-  }
-}
-
-otelcol.exporter.otlphttp "victoriatraces" {
-  client {
-    endpoint = "http://victoriatraces.victoriatraces.svc.cluster.local:10428/insert/opentelemetry"
-
-    tls {
-      insecure = true
-      insecure_skip_verify = true
-    }
   }
 }
