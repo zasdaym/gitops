@@ -10,5 +10,5 @@ data:
   POSTGRES_USER: postgres
   RAILS_ASSUME_SSL: "false"
   RAILS_FORCE_SSL: "false"
-  REDIS_URL: redis.redis.svc.cluster.local
+  REDIS_URL: redis://redis.redis.svc.cluster.local
   SELF_HOSTED: "true"
