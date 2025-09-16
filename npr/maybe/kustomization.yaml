@@ -1,3 +1,4 @@
+namespace: maybe
 resources:
   - namespace.yaml
   - configmap.yaml
