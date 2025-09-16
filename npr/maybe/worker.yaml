@@ -23,6 +23,8 @@ spec:
           - exec
           - sidekiq
         envFrom:
+          - configMapRef:
+              name: maybe
           - secretRef:
               name: maybe
         resources:

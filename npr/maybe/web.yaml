@@ -52,6 +52,8 @@ spec:
       - image: ghcr.io/maybe-finance/maybe
         name: web
         envFrom:
+          - configMapRef:
+              name: maybe
           - secretRef:
               name: maybe
         resources:

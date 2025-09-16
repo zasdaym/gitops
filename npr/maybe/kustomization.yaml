@@ -1,4 +1,5 @@
 resources:
   - namespace.yaml
+  - infisicalsecret.yaml
   - worker.yaml
   - web.yaml
