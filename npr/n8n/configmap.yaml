@@ -4,6 +4,8 @@ metadata:
   name: n8n
   namespace: n8n
 data:
+  DB_SQLITE_POOL_SIZE: "10"
+  N8N_BLOCK_ENV_ACCESS_IN_NODE: "true"
   N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
   N8N_PORT: "5678"
   N8N_RUNNERS_ENABLED: "true"
