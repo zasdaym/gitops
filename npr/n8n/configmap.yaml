@@ -4,7 +4,7 @@ metadata:
   name: n8n
   namespace: n8n
 data:
-  N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: true
-  N8N_RUNNERS_ENABLED: true
+  N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+  N8N_RUNNERS_ENABLED: "true"
   GENERIC_TIMEZONE: Asia/Jakarta
   TZ: Asia/Jakarta
