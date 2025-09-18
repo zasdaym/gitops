@@ -7,8 +7,6 @@ labels:
 resources:
   - namespace.yaml
   - configmap.yaml
-  - infisicalsecret.yaml
-  - pvc.yaml
-  - deployment.yaml
+  - statefulset.yaml
   - service.yaml
   - ingress.yaml

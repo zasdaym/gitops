@@ -1,6 +1,6 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: n8n
 spec:
@@ -35,5 +35,6 @@ spec:
               mountPath: /home/node/.n8n
       volumes:
         - name: n8n-data
-          persistentVolumeClaim:
-            claimName: n8n-data
+          hostPath:
+            path: /srv/n8n/data
+            type: DirectoryOrCreate
