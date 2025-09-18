@@ -1,0 +1,14 @@
+namespace: n8n
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: n8n
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - infisicalsecret.yaml
+  - pvc.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml

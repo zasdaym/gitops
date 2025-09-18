@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: n8n
+  namespace: n8n
+data:
+  N8N_HOST: n8n.zasdaym.my.id
+  N8N_PORT: "5678"
+  N8N_PROTOCOL: https
+  WEBHOOK_URL: https://n8n.zasdaym.my.id/
