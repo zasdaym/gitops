@@ -24,12 +24,17 @@ spec:
       baseProtocol: https
       databaseUrlSecretName: windmill
       databaseUrlSecretKey: DATABASE_URL
-      resources:
-        requests:
-          cpu: 100m
-          memory: 512Mi
-        limits:
-          memory: 1Gi
+      workerGroups:
+        - name: default
+          controller: Deployment
+          replicas: 1
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1Gi
+            limits:
+              memory: 2Gi
+          mode: worker
     ingress:
       enabled: true
       className: nginx
