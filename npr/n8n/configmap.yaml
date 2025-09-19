@@ -11,3 +11,5 @@ data:
   N8N_RUNNERS_ENABLED: "true"
   GENERIC_TIMEZONE: Asia/Jakarta
   TZ: Asia/Jakarta
+  WEBHOOK_URL: https://n8n.zasdaym.my.id
+  N8N_PROXY_HOPS: "1"
