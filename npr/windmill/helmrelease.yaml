@@ -1,0 +1,35 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: windmill
+  namespace: windmill
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: windmill
+      sourceRef:
+        kind: HelmRepository
+        name: windmill
+        namespace: windmill
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    postgresql:
+      enabled: false
+    windmill:
+      baseDomain: windmill.zasdaym.my.id
+      baseProtocol: https
+      databaseUrlSecretName: windmill
+      databaseUrlSecretKey: DATABASE_URL
+      resources:
+        requests:
+          cpu: 100m
+          memory: 512Mi
+        limits:
+          memory: 1Gi
+    ingress:
+      enabled: true
+      className: nginx
