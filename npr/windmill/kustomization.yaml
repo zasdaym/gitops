@@ -1,3 +1,4 @@
+namespace: windmill
 resources:
   - namespace.yaml
   - infisicalsecret.yaml
