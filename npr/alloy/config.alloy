@@ -3,11 +3,19 @@ logging {
   format = "logfmt"
 }
 
+prometheus.exporter.unix "default" { 
+}
+
+prometheus.scrape "default" {
+  targets    = prometheus.exporter.unix.default.targets
+  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+}
+
 discovery.kubernetes "pods" {
   role = "pod"
 
   selectors {
-    role = "pod"
+    role  = "pod"
     field = "spec.nodeName=" + coalesce(env("HOSTNAME"), constants.hostname)
   }
 }
