@@ -1,155 +1,154 @@
 logging {
-  level  = "error"
-  format = "logfmt"
+	level  = "error"
+	format = "logfmt"
 }
 
-prometheus.exporter.unix "default" { 
-}
+prometheus.exporter.unix "default" { }
 
 prometheus.scrape "default" {
-  targets    = prometheus.exporter.unix.default.targets
-  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+	targets    = prometheus.exporter.unix.default.targets
+	forward_to = [prometheus.remote_write.victoriametrics.receiver]
 }
 
 discovery.kubernetes "nodes" {
-  role = "node"
+	role = "node"
 }
 
 discovery.relabel "local_node" {
-  targets = discovery.kubernetes.nodes.targets
+	targets = discovery.kubernetes.nodes.targets
 
-  rule {
-    source_labels = ["__meta_kubernetes_node_name"]
-    action        = "keep"
-    regex         = env("HOSTNAME")
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_node_name"]
+		action        = "keep"
+		regex         = env("HOSTNAME")
+	}
 
-  rule {
-    replacement  = "https"
-    target_label = "__scheme__"
-  }
+	rule {
+		replacement  = "https"
+		target_label = "__scheme__"
+	}
 
-  rule {
-    replacement  = "metrics/cadvisor"
-    target_label = "__metrics_path__"
-  }
+	rule {
+		replacement  = "metrics/cadvisor"
+		target_label = "__metrics_path__"
+	}
 }
 
 prometheus.scrape "local_cadvisor" {
-  targets    = discovery.relabel_local_node.output
-  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+	targets    = discovery.relabel.local_node.output
+	forward_to = [prometheus.remote_write.victoriametrics.receiver]
 
-  authorization {
-    credentials_file = "/run/secrets/kubernetes.io/serviceaccount/token"
-    type             = "Bearer"
-  }
+	authorization {
+		credentials_file = "/run/secrets/kubernetes.io/serviceaccount/token"
+		type             = "Bearer"
+	}
 
-  tls_config {
-    ca_file              = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
-    insecure_skip_verify = false
-  }
+	tls_config {
+		ca_file              = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+		insecure_skip_verify = false
+	}
 }
 
 discovery.kubernetes "pods" {
-  role = "pod"
+	role = "pod"
 
-  selectors {
-    role  = "pod"
-    field = "spec.nodeName=" + coalesce(env("HOSTNAME"), constants.hostname)
-  }
+	selectors {
+		role  = "pod"
+		field = "spec.nodeName=" + coalesce(env("HOSTNAME"), constants.hostname)
+	}
 }
 
 discovery.relabel "pod_logs" {
-  targets = discovery.kubernetes.pods.targets
+	targets = discovery.kubernetes.pods.targets
 
-  rule {
-    source_labels = ["__meta_kubernetes_pod_container_name"]
-    target_label  = "container"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_pod_container_name"]
+		target_label  = "container"
+	}
 
-  rule {
-    source_labels = ["__meta_kubernetes_pod_name"]
-    target_label  = "pod"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_pod_name"]
+		target_label  = "pod"
+	}
 
-  rule {
-    source_labels = ["__meta_kubernetes_namespace"]
-    target_label  = "namespace"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_namespace"]
+		target_label  = "namespace"
+	}
 
-  rule {
-    source_labels = ["__meta_kubernetes_pod_node_name"]
-    target_label  = "node"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_pod_node_name"]
+		target_label  = "node"
+	}
 
-  rule {
-    source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
-    separator     = "/"
-    target_label  = "__path__"
-    replacement   = "/var/log/pods/*$1/*.log"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+		separator     = "/"
+		target_label  = "__path__"
+		replacement   = "/var/log/pods/*$1/*.log"
+	}
 
-  rule {
-    source_labels = ["__meta_kubernetes_pod_annotationpresent_kubernetes_io_config_hash", "__meta_kubernetes_pod_annotation_kubernetes_io_config_hash", "__meta_kubernetes_pod_container_name"]
-    separator     = "/"
-    regex         = "true/(.*)"
-    target_label  = "__path__"
-    replacement   = "/var/log/pods/*$1/*.log"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_pod_annotationpresent_kubernetes_io_config_hash", "__meta_kubernetes_pod_annotation_kubernetes_io_config_hash", "__meta_kubernetes_pod_container_name"]
+		separator     = "/"
+		regex         = "true/(.*)"
+		target_label  = "__path__"
+		replacement   = "/var/log/pods/*$1/*.log"
+	}
 }
 
 local.file_match "kubernetes_pods" {
-  path_targets = discovery.relabel.pod_logs.output
+	path_targets = discovery.relabel.pod_logs.output
 }
 
 loki.source.file "pod_logs" {
-  targets    = local.file_match.kubernetes_pods.targets
-  forward_to = [loki.process.kubernetes_pods.receiver]
+	targets    = local.file_match.kubernetes_pods.targets
+	forward_to = [loki.process.kubernetes_pods.receiver]
 }
 
 loki.process "kubernetes_pods" {
-  forward_to = [loki.write.victorialogs.receiver]
+	forward_to = [loki.write.victorialogs.receiver]
 
-  stage.cri { }
+	stage.cri { }
 }
 
 discovery.relabel "pod_metrics" {
-  targets = discovery.kubernetes.pods.targets
+	targets = discovery.kubernetes.pods.targets
 
-  rule {
-    source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
-    regex         = "true"
-    action        = "keep"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
+		regex         = "true"
+		action        = "keep"
+	}
 
-  rule {
-    source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_path"]
-    target_label  = "__metrics_path__"
-    regex         = "(.+)"
-  }
+	rule {
+		source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_path"]
+		target_label  = "__metrics_path__"
+		regex         = "(.+)"
+	}
 
-  rule {
-    source_labels = ["__address__", "__meta_kubernetes_pod_annotation_prometheus_io_port"]
-    regex         = "([^:]+)(?::[0-9]+)?;([0-9]+)"
-    replacement   = "${1}:${2}"
-    target_label  = "__address__"
-  }
+	rule {
+		source_labels = ["__address__", "__meta_kubernetes_pod_annotation_prometheus_io_port"]
+		regex         = "([^:]+)(?::[0-9]+)?;([0-9]+)"
+		replacement   = "${1}:${2}"
+		target_label  = "__address__"
+	}
 }
 
 prometheus.scrape "pod_metrics" {
-  honor_labels = true
-  targets      = discovery.relabel.pod_metrics.output
-  forward_to   = [prometheus.remote_write.victoriametrics.receiver]
+	honor_labels = true
+	targets      = discovery.relabel.pod_metrics.output
+	forward_to   = [prometheus.remote_write.victoriametrics.receiver]
 }
 
 prometheus.remote_write "victoriametrics" {
-  endpoint {
-    url = "http://victoriametrics.victoriametrics.svc.cluster.local:8428/api/v1/write"
-  }
+	endpoint {
+		url = "http://victoriametrics.victoriametrics.svc.cluster.local:8428/api/v1/write"
+	}
 }
 
 loki.write "victorialogs" {
-  endpoint {
-    url = "http://victorialogs.victorialogs.svc.cluster.local:9428/insert/loki/api/v1/push"
-  }
+	endpoint {
+		url = "http://victorialogs.victorialogs.svc.cluster.local:9428/insert/loki/api/v1/push"
+	}
 }
