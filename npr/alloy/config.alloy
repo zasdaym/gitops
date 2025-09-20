@@ -11,13 +11,43 @@ prometheus.scrape "default" {
   forward_to = [prometheus.remote_write.victoriametrics.receiver]
 }
 
-prometheus.exporter.cadvisor "default" {
-  disable_root_cgroup_stats = true
+discovery.kubernetes "nodes" {
+  role = "node"
 }
 
-prometheus.scrape "cadvisor" {
-  targets    = prometheus.exporter.cadvisor.default.targets
+discovery.relabel "local_node" {
+  targets = discovery.kubernetes.nodes.targets
+
+  rule {
+    source_labels = ["__meta_kubernetes_node_name"]
+    action        = "keep"
+    regex         = env("HOSTNAME")
+  }
+
+  rule {
+    replacement  = "https"
+    target_label = "__scheme__"
+  }
+
+  rule {
+    replacement  = "metrics/cadvisor"
+    target_label = "__metrics_path__"
+  }
+}
+
+prometheus.scrape "local_cadvisor" {
+  targets    = discovery.relabel_local_node.output
   forward_to = [prometheus.remote_write.victoriametrics.receiver]
+
+  authorization {
+    credentials_file = "/run/secrets/kubernetes.io/serviceaccount/token"
+    type             = "Bearer"
+  }
+
+  tls_config {
+    ca_file              = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+    insecure_skip_verify = false
+  }
 }
 
 discovery.kubernetes "pods" {
