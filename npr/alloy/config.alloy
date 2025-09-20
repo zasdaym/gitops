@@ -11,6 +11,14 @@ prometheus.scrape "default" {
   forward_to = [prometheus.remote_write.victoriametrics.receiver]
 }
 
+prometheus.exporter.cadvisor "default" {
+}
+
+prometheus.scrape "cadvisor" {
+  targets    = prometheus.exporter.cadvisor.default.targets
+  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+}
+
 discovery.kubernetes "pods" {
   role = "pod"
 
