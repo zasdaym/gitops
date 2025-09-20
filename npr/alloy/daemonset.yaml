@@ -42,6 +42,9 @@ spec:
         - name: cgroup
           mountPath: /sys/fs/cgroup
           readOnly: true
+        - name: containerd
+          mountPath: /run/containerd/containerd.sock
+          readOnly: true
         securityContext:
           privileged: true
           runAsUser: 0
@@ -64,5 +67,8 @@ spec:
       - name: cgroup
         hostPath:
           path: /sys/fs/cgroup
+      - name: containerd
+        hostPath:
+          path: /run/k0s/containerd.sock
       hostNetwork: false
       hostPID: true
