@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: darkhttpd
-          image: p3terx/darkhttpd:1.16
+          image: p3terx/darkhttpd:1.17
           args:
             - /srv/darkhttpd
             - --no-server-id
