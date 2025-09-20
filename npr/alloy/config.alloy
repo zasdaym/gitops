@@ -106,7 +106,7 @@ discovery.relabel "pod_metrics" {
 }
 
 prometheus.scrape "pod_metrics" {
-  honos_labels = true
+  honor_labels = true
   targets      = discovery.relabel.pod_metrics.output
   forward_to   = [prometheus.remote_write.victoriametrics.receiver]
 }
