@@ -32,12 +32,6 @@ discovery.relabel "pod_logs" {
   targets = discovery.kubernetes.pods.targets
 
   rule {
-    source_labels = ["__meta_kubernetes_pod_phase"]
-    regex         = "Pending|Succeeded|Failed|Unknown"
-    action        = "drop"
-  }
-
-  rule {
     source_labels = ["__meta_kubernetes_pod_container_name"]
     target_label  = "container"
   }
@@ -92,47 +86,29 @@ discovery.relabel "pod_metrics" {
   targets = discovery.kubernetes.pods.targets
 
   rule {
-    source_labels = ["__meta_kubernetes_pod_phase"]
-    regex         = "Pending|Succeeded|Failed|Unknown"
-    action        = "drop"
-  }
-  rule {
     source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
     regex         = "true"
     action        = "keep"
   }
+
   rule {
     source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_path"]
     target_label  = "__metrics_path__"
     regex         = "(.+)"
   }
+
   rule {
     source_labels = ["__address__", "__meta_kubernetes_pod_annotation_prometheus_io_port"]
     regex         = "([^:]+)(?::[0-9]+)?;([0-9]+)"
     replacement   = "${1}:${2}"
     target_label  = "__address__"
   }
-  rule {
-    source_labels = ["__meta_kubernetes_namespace"]
-    target_label  = "namespace"
-  }
-  rule {
-    source_labels = ["__meta_kubernetes_pod_name"]
-    target_label  = "pod"
-  }
-  rule {
-    source_labels = ["__meta_kubernetes_pod_container_name"]
-    target_label  = "container"
-  }
-  rule {
-    source_labels = ["__meta_kubernetes_pod_node_name"]
-    target_label  = "node"
-  }
 }
 
 prometheus.scrape "pod_metrics" {
-  targets    = discovery.relabel.pod_metrics.output
-  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+  honos_labels = true
+  targets      = discovery.relabel.pod_metrics.output
+  forward_to   = [prometheus.remote_write.victoriametrics.receiver]
 }
 
 prometheus.remote_write "victoriametrics" {
