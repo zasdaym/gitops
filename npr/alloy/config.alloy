@@ -15,6 +15,8 @@ prometheus.exporter.cadvisor "default" {
 }
 
 prometheus.scrape "cadvisor" {
+  disable_root_cgroup_stats = true
+
   targets    = prometheus.exporter.cadvisor.default.targets
   forward_to = [prometheus.remote_write.victoriametrics.receiver]
 }
