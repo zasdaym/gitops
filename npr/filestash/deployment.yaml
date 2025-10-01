@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filestash
+  namespace: filestash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filestash
+  template:
+    metadata:
+      labels:
+        app: filestash
+    spec:
+      containers:
+      - name: filestash
+        image: machines/filestash:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            memory: 512Mi
