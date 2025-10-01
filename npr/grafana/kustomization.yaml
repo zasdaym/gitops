@@ -1,6 +1,9 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
+namespace: grafana
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: grafana
 resources:
 - namespace.yaml
 - deployment.yaml

@@ -1,4 +1,9 @@
 namespace: maybe
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: maybe
 resources:
   - namespace.yaml
   - configmap.yaml

@@ -1,3 +1,9 @@
+namespace: filestash
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: filestash
 resources:
 - namespace.yaml
 - deployment.yaml
