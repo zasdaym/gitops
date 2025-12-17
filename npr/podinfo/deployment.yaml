@@ -14,7 +14,7 @@ spec:
         - --otel-service-name=podinfo
         env:
         - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-          value: http://victoriatraces.victoriatraces.svc.cluster.local:10428/insert/opentelemetry/v1/traces
+          value: http://victoriatraces.victoriatraces.svc.cluster.local:4317
         resources:
           limits:
             memory: 128Mi

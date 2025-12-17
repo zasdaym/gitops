@@ -18,9 +18,13 @@ spec:
           args:
             - "-storageDataPath=/storage"
             - "-retentionPeriod=1w"
+            - "-otlpGRPCListenAddr=:4317"
+            - "-otlpGRPC.tls=false"
           ports:
             - containerPort: 9428
               name: http
+            - containerPort: 4317
+              name: grpc
           resources:
             requests:
               cpu: 100m

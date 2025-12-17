@@ -8,5 +8,6 @@ spec:
     app: victoriatraces
   ports:
     - port: 10428
-      targetPort: 10428
       name: http
+    - port: 4317
+      name: grpc
