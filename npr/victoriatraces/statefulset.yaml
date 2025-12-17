@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: victoriatraces
-          image: victoriametrics/victoria-traces:v0.2.0
+          image: victoriametrics/victoria-traces:v0.5.1
           args:
             - "-storageDataPath=/storage"
             - "-retentionPeriod=1w"
