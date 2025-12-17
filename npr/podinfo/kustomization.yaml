@@ -1,0 +1,11 @@
+namespace: podinfo
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: podinfo
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml

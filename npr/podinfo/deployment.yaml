@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+spec:
+  template:
+    spec:
+      containers:
+      - name: podinfo
+        image: ghcr.io/stefanprodan/podinfo:6.9.4
+        command:
+        - ./podinfo
+        - --port=9898
+        - --otel-service-name=podinfo
+        env:
+        - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+          value: http://victoriatraces.victoriatraces.svc.cluster.local:10428/insert/opentelemetry/v1/traces
+        resources:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
