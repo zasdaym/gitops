@@ -1,0 +1,12 @@
+namespace: actualbudget
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: actualbudget
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml

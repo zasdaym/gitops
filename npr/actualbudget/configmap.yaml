@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: actualbudget
+  namespace: actualbudget
+data:
+  PORT: "5006"
