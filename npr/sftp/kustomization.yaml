@@ -1,0 +1,10 @@
+namespace: sftp
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: sftp
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml

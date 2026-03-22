@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sftp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sftp
+  template:
+    metadata:
+      labels:
+        app: sftp
+    spec:
+      containers:
+        - name: sftp
+          image: emberstack/sftp:build-5.1.72
+          ports:
+            - containerPort: 22
+              name: sftp
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: config
+              mountPath: /app/config/sftp.json
+              subPath: sftp.json
+              readOnly: true
+            - name: data
+              mountPath: /home/admin/upload
+            - name: data
+              mountPath: /home/guest/upload
+              readOnly: true
+      volumes:
+        - name: config
+          secret:
+            secretName: sftp-users
+        - name: data
+          hostPath:
+            path: /srv/darkhttpd
+            type: DirectoryOrCreate
