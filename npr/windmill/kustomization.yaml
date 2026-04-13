@@ -1,6 +1,0 @@
-namespace: windmill
-resources:
-  - namespace.yaml
-  - infisicalsecret.yaml
-  - helmrepository.yaml
-  - helmrelease.yaml
