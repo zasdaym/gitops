@@ -21,6 +21,8 @@ spec:
     controller:
       hostPort:
         enabled: true
+      updateStrategy:
+        type: Recreate
       resources:
         requests:
           cpu: 100m
