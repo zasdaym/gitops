@@ -8,7 +8,7 @@ spec:
     - name: http
       namespace: nginx-gateway
   hostnames:
-    - file.zasdaym.my.id
+    - file.zasda.id
   rules:
     - matches:
         - path:

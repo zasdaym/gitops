@@ -6,7 +6,7 @@ metadata:
 spec:
   hosts:
   - ssh:
-      address: srv1.zasdaym.my.id
+      address: srv1.zasda.id
       user: root
     role: "controller+worker"
     noTaints: true

@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: bar-stg.zasdaym.my.id
+    - host: bar-stg.zasda.id
       http:
         paths:
           - backend:
