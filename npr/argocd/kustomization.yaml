@@ -3,3 +3,5 @@ resources:
   - namespace.yaml
   - https://raw.githubusercontent.com/argoproj/argo-cd/v3.4.5/manifests/core-install.yaml
   - applicationset.yaml
+patches:
+  - path: resources.yaml
