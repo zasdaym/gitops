@@ -1,16 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: darkhttpd
+  name: caddy
 spec:
   template:
     spec:
       containers:
-        - name: darkhttpd
-          image: p3terx/darkhttpd:1.17
+        - name: caddy
+          image: caddy:2.10
           args:
-            - /srv/darkhttpd
-            - --no-server-id
+            - file-server
+            - --root
+            - /srv
+            - --listen
+            - :80
+            - --browse
+          ports:
+            - containerPort: 80
+              name: http
           resources:
             requests:
               cpu: 100m
@@ -19,7 +26,7 @@ spec:
               memory: 512Mi
           volumeMounts:
             - name: webroot
-              mountPath: /srv/darkhttpd
+              mountPath: /srv
               readOnly: true
       volumes:
         - name: webroot

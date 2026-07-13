@@ -1,9 +1,9 @@
-namespace: darkhttpd
+namespace: caddy
 labels:
   - includeSelectors: true
     includeTemplates: true
     pairs:
-      app: darkhttpd 
+      app: caddy
 resources:
   - namespace.yaml
   - deployment.yaml

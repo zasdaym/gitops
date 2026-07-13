@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: darkhttpd
+  name: caddy
 spec:
   ingressClassName: nginx
   rules:
@@ -10,7 +10,7 @@ spec:
         paths:
           - backend:
               service:
-                name: darkhttpd
+                name: caddy
                 port:
                   number: 80
             path: /
