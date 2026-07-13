@@ -1,0 +1,8 @@
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8080"
+  prometheus.io/metrics: "/metrics"
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi

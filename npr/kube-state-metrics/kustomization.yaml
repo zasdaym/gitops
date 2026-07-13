@@ -1,4 +1,11 @@
 namespace: kube-state-metrics
 resources:
   - namespace.yaml
-  - helm.yaml
+helmCharts:
+  - name: kube-state-metrics
+    repo: oci://ghcr.io/prometheus-community/charts
+    version: 6.3.0
+    releaseName: kube-state-metrics
+    namespace: kube-state-metrics
+    includeCRDs: true
+    valuesFile: values.yaml

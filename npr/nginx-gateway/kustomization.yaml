@@ -1,5 +1,12 @@
 resources:
   - gateway-crd.yaml
   - namespace.yaml
-  - helm.yaml
   - gateway.yaml
+helmCharts:
+  - name: nginx-gateway-fabric
+    repo: oci://ghcr.io/nginx/charts
+    version: 2.0.2
+    releaseName: nginx-gateway
+    namespace: nginx-gateway
+    includeCRDs: true
+    valuesFile: values.yaml

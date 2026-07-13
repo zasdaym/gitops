@@ -1,0 +1,6 @@
+nginx:
+  service:
+    type: NodePort
+    nodePorts:
+      - port: 30080
+        listenerPort: 80

@@ -5,3 +5,4 @@ resources:
   - applicationset.yaml
 patches:
   - path: resources.yaml
+  - path: argocd-cm.yaml

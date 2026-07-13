@@ -1,4 +1,10 @@
 namespace: infisical
 resources:
   - namespace.yaml
-  - helm.yaml
+helmCharts:
+  - name: secrets-operator
+    repo: https://dl.cloudsmith.io/public/infisical/helm-charts/helm/charts
+    version: v0.10.6
+    releaseName: infisical
+    namespace: infisical
+    includeCRDs: true
