@@ -7,8 +7,9 @@ spec:
     spec:
       containers:
         - name: caddy
-          image: caddy:2.10
+          image: caddy:2.11.4
           args:
+            - caddy
             - file-server
             - --root
             - /srv
