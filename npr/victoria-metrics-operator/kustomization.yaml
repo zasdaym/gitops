@@ -1,0 +1,11 @@
+namespace: victoria-metrics-operator
+resources:
+  - namespace.yaml
+helmCharts:
+  - name: victoria-metrics-operator
+    repo: https://victoriametrics.github.io/helm-charts/
+    version: 0.67.2
+    releaseName: vmo
+    namespace: victoria-metrics-operator
+    includeCRDs: true
+    valuesFile: values.yaml

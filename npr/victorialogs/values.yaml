@@ -1,0 +1,49 @@
+vmauth:
+  enabled: true
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+vlinsert:
+  replicaCount: 1
+  service:
+    clusterIP: None
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+
+vlselect:
+  replicaCount: 1
+  service:
+    clusterIP: None
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+
+vlstorage:
+  replicaCount: 1
+  retentionPeriod: 7d
+  persistentVolume:
+    enabled: true
+    storageClassName: local-path
+    size: 10Gi
+  podSecurityContext:
+    enabled: false
+  securityContext:
+    enabled: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 1Gi

@@ -1,0 +1,13 @@
+service:
+  enabled: false
+  port: 9100
+
+hostNetwork: true
+hostPID: true
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi

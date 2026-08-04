@@ -1,24 +1,20 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: grafana-datasources
-  namespace: grafana
-data:
-  datasources.yaml: |
-    apiVersion: 1
-    datasources:
-    - name: VictoriaMetrics
-      type: prometheus
-      access: proxy
-      url: http://victoriametrics.victoriametrics.svc.cluster.local:8428
-      isDefault: true
-      editable: false
-      jsonData:
-        httpMethod: GET
-    - name: VictoriaLogs
-      type: victoriametrics-logs-datasource
-      access: proxy
-      url: http://victorialogs.victorialogs.svc.cluster.local:9428
-      editable: false
-      jsonData:
-        maxLines: 1000
+apiVersion: 1
+prune: true
+datasources:
+  - name: VictoriaMetrics
+    uid: victoriametrics
+    type: prometheus
+    access: proxy
+    url: http://victoriametrics-victoria-metrics-cluster-vmauth.victoriametrics.svc.cluster.local:8427/select/0/prometheus
+    isDefault: true
+    editable: false
+    jsonData:
+      httpMethod: GET
+  - name: VictoriaLogs
+    uid: victorialogs
+    type: victoriametrics-logs-datasource
+    access: proxy
+    url: http://victorialogs-victoria-logs-cluster-vmauth.victorialogs.svc.cluster.local:8427
+    editable: false
+    jsonData:
+      maxLines: 1000

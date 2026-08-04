@@ -1,0 +1,19 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMNodeScrape
+metadata:
+  name: node-exporter
+  labels:
+    monitoring.zasda.id/scrape: node-exporter
+spec:
+  selector: {}
+  port: "9100"
+  path: /metrics
+  scheme: http
+  interval: 30s
+  scrapeTimeout: 10s
+  relabelConfigs:
+    - action: labelmap
+      regex: __meta_kubernetes_node_label_(.+)
+    - action: replace
+      target_label: job
+      replacement: node-exporter

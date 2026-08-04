@@ -1,0 +1,19 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAgent
+metadata:
+  name: vmagent
+spec:
+  replicaCount: 1
+  scrapeInterval: 30s
+  scrapeTimeout: 10s
+  nodeScrapeSelector:
+    matchLabels:
+      monitoring.zasda.id/scrape: node-exporter
+  remoteWrite:
+    - url: http://victoriametrics-victoria-metrics-cluster-vmauth.victoriametrics.svc.cluster.local:8427/insert/0/prometheus/api/v1/write
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 256Mi

@@ -8,5 +8,14 @@ resources:
 - namespace.yaml
 - deployment.yaml
 - service.yaml
-- datasources.yaml
 - ingress.yaml
+configMapGenerator:
+- name: grafana-datasources
+  files:
+  - datasources.yaml
+- name: grafana-dashboard-provider
+  files:
+  - dashboard-provider.yaml
+- name: grafana-dashboard-node-exporter
+  files:
+  - node-exporter.json=dashboards/node-exporter.json
