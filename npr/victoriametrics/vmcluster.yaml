@@ -3,7 +3,7 @@ kind: VMCluster
 metadata:
   name: victoriametrics
 spec:
-  clusterVersion: v1.148.0
+  clusterVersion: v1.148.0-cluster
   retentionPeriod: 31d
   replicationFactor: 1
   vminsert:
