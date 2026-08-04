@@ -5,7 +5,7 @@ datasources:
     uid: victoriametrics
     type: prometheus
     access: proxy
-    url: http://victoriametrics-victoria-metrics-cluster-vmauth.victoriametrics.svc.cluster.local:8427/select/0/prometheus
+    url: http://vmselect-victoriametrics.victoriametrics.svc.cluster.local:8481/select/0/prometheus
     isDefault: true
     editable: false
     jsonData:
@@ -14,7 +14,7 @@ datasources:
     uid: victorialogs
     type: victoriametrics-logs-datasource
     access: proxy
-    url: http://victorialogs-victoria-logs-cluster-vmauth.victorialogs.svc.cluster.local:8427
+    url: http://vlselect-victorialogs.victorialogs.svc.cluster.local:9471/select
     editable: false
     jsonData:
       maxLines: 1000

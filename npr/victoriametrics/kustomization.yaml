@@ -1,10 +1,4 @@
 namespace: victoriametrics
 resources:
   - namespace.yaml
-helmCharts:
-  - name: victoria-metrics-cluster
-    repo: https://victoriametrics.github.io/helm-charts/
-    version: 0.47.0
-    releaseName: victoriametrics
-    namespace: victoriametrics
-    valuesFile: values.yaml
+  - vmcluster.yaml

@@ -1,0 +1,41 @@
+apiVersion: operator.victoriametrics.com/v1
+kind: VLCluster
+metadata:
+  name: victorialogs
+spec:
+  clusterVersion: v1.52.0
+  useStrictSecurity: false
+  vlinsert:
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+  vlselect:
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+  vlstorage:
+    replicaCount: 1
+    retentionPeriod: 7d
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: local-path
+          resources:
+            requests:
+              storage: 10Gi
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
