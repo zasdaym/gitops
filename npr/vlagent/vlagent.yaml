@@ -1,0 +1,26 @@
+apiVersion: operator.victoriametrics.com/v1
+kind: VLAgent
+metadata:
+  name: kubernetes-logs
+spec:
+  image:
+    repository: victoriametrics/vlagent
+    tag: v1.52.0
+  k8sCollector:
+    enabled: true
+    excludeFilter: kubernetes.pod_name:=%{POD_NAME}
+  extraEnvs:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+  remoteWrite:
+    - url: http://vlinsert-victorialogs.observability.svc.cluster.local:9481/internal/insert
+  remoteWriteSettings:
+    maxDiskUsagePerURL: 1GiB
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
