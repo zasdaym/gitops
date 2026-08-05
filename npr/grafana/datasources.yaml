@@ -14,7 +14,7 @@ datasources:
     uid: victorialogs
     type: victoriametrics-logs-datasource
     access: proxy
-    url: http://vlselect-victorialogs.victorialogs.svc.cluster.local:9471/select
+    url: http://vlselect-victorialogs.victorialogs.svc.cluster.local:9471
     editable: false
     jsonData:
       maxLines: 1000
