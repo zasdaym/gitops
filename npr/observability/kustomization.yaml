@@ -1,6 +1,8 @@
 namespace: observability
 resources:
   - namespace.yaml
+  - vmcluster.yaml
+  - vlcluster.yaml
 helmCharts:
   - name: victoria-metrics-operator
     repo: https://victoriametrics.github.io/helm-charts/
@@ -8,4 +10,4 @@ helmCharts:
     releaseName: vmo
     namespace: observability
     includeCRDs: true
-    valuesFile: values.yaml
+    valuesFile: operator-values.yaml

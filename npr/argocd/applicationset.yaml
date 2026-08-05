@@ -26,7 +26,7 @@ spec:
         path: "{{.path.path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ if or (eq .path.basename "victoria-metrics-operator") (eq .path.basename "victoriametrics") (eq .path.basename "victorialogs") }}observability{{ else }}{{ .path.basename }}{{ end }}'
+        namespace: "{{.path.basename}}"
       syncPolicy:
         automated:
           prune: true
