@@ -5,10 +5,10 @@ labels:
     pairs:
       app: grafana
 resources:
-- namespace.yaml
-- deployment.yaml
-- service.yaml
-- ingress.yaml
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - httproute.yaml
 configMapGenerator:
 - name: grafana-datasources
   files:
