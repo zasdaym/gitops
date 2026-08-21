@@ -1,0 +1,9 @@
+controllerManager:
+  manager:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 128Mi
+      requests:
+        cpu: null
+        memory: 64Mi

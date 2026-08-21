@@ -32,10 +32,13 @@ spec:
         - name: dashboard-provider
           mountPath: /etc/grafana/provisioning/dashboards
         - name: dashboard-node-exporter
-          mountPath: /var/lib/grafana/dashboards
+          mountPath: /var/lib/grafana/dashboards/node-exporter
+        - name: dashboard-victoriametrics-cluster
+          mountPath: /var/lib/grafana/dashboards/victoriametrics-cluster
+        - name: dashboard-victorialogs-cluster
+          mountPath: /var/lib/grafana/dashboards/victorialogs-cluster
         resources:
           requests:
-            cpu: 100m
             memory: 128Mi
           limits:
             memory: 512Mi
@@ -49,3 +52,9 @@ spec:
       - name: dashboard-node-exporter
         configMap:
           name: grafana-dashboard-node-exporter
+      - name: dashboard-victoriametrics-cluster
+        configMap:
+          name: grafana-dashboard-victoriametrics-cluster
+      - name: dashboard-victorialogs-cluster
+        configMap:
+          name: grafana-dashboard-victorialogs-cluster

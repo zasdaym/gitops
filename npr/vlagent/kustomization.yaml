@@ -1,4 +1,0 @@
-namespace: vlagent
-resources:
-  - namespace.yaml
-  - vlagent.yaml

@@ -3,6 +3,9 @@ resources:
   - namespace.yaml
   - vmcluster.yaml
   - vlcluster.yaml
+  - vmagent.yaml
+  - node-exporter-scrape.yaml
+  - vlagent.yaml
 helmCharts:
   - name: victoria-metrics-operator
     repo: https://victoriametrics.github.io/helm-charts/

@@ -10,3 +10,4 @@ helmCharts:
     releaseName: infisical
     namespace: infisical
     includeCRDs: true
+    valuesFile: values.yaml

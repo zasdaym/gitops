@@ -10,7 +10,6 @@ spec:
     replicaCount: 1
     resources:
       requests:
-        cpu: 100m
         memory: 512Mi
       limits:
         memory: 1Gi
@@ -18,7 +17,6 @@ spec:
     replicaCount: 1
     resources:
       requests:
-        cpu: 100m
         memory: 512Mi
       limits:
         memory: 1Gi
@@ -35,7 +33,6 @@ spec:
               storage: 10Gi
     resources:
       requests:
-        cpu: 100m
         memory: 512Mi
       limits:
         memory: 1Gi

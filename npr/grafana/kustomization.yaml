@@ -19,3 +19,9 @@ configMapGenerator:
 - name: grafana-dashboard-node-exporter
   files:
   - node-exporter.json=dashboards/node-exporter.json
+- name: grafana-dashboard-victoriametrics-cluster
+  files:
+  - victoriametrics-cluster.json=dashboards/victoriametrics-cluster.json
+- name: grafana-dashboard-victorialogs-cluster
+  files:
+  - victorialogs-cluster.json=dashboards/victorialogs-cluster.json

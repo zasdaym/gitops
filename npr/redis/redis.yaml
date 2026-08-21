@@ -33,5 +33,4 @@ spec:
         name: redis
         resources:
           requests:
-            cpu: 100m
             memory: 256Mi

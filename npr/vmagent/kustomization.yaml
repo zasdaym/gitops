@@ -1,5 +1,0 @@
-namespace: vmagent
-resources:
-  - namespace.yaml
-  - vmagent.yaml
-  - node-exporter-scrape.yaml
