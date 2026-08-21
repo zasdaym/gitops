@@ -5,8 +5,11 @@ metadata:
   name: pdack
 spec:
   schedule: "*/2 * * * *"
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 110
+      backoffLimit: 1
       template:
         spec:
           containers:
