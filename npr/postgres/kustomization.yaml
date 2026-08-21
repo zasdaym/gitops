@@ -6,6 +6,6 @@ labels:
       app: postgres
 resources:
   - namespace.yaml
-  - infisicalsecret.yaml
+  - staticsecret.yaml
   - service.yaml
   - statefulset.yaml
