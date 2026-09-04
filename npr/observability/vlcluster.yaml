@@ -9,14 +9,16 @@ spec:
     replicaCount: 1
     resources:
       requests:
-        memory: 512Mi
+        cpu: 10m
+        memory: 256Mi
       limits:
         memory: 1Gi
   vlselect:
     replicaCount: 1
     resources:
       requests:
-        memory: 512Mi
+        cpu: 10m
+        memory: 256Mi
       limits:
         memory: 1Gi
   vlstorage:
@@ -33,6 +35,7 @@ spec:
               storage: 10Gi
     resources:
       requests:
-        memory: 512Mi
+        cpu: 10m
+        memory: 256Mi
       limits:
         memory: 1Gi
