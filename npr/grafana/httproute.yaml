@@ -4,7 +4,9 @@ metadata:
   name: grafana
 spec:
   parentRefs:
-    - name: http
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: http
       namespace: nginx-gateway
       sectionName: http
   hostnames:
