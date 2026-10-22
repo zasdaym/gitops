@@ -1,0 +1,12 @@
+namespace: scopeweaver
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: scopeweaver
+resources:
+  - namespace.yaml
+  - externalsecret.yaml
+  - deployment.yaml
+  - service.yaml
+  - httproute.yaml

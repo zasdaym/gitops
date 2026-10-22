@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scopeweaver
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      initContainers:
+        - name: db-init
+          image: postgres:17.2
+          env:
+            - name: PGHOST
+              value: postgres.postgres.svc
+            - name: PGUSER
+              value: postgres
+            - name: PGDATABASE
+              value: postgres
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: scopeweaver
+                  key: pgpassword
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+              until pg_isready; do sleep 2; done
+              if psql -tAc "SELECT 1 FROM pg_database WHERE datname='scopeweaver'" | grep -q 1; then
+                echo "database scopeweaver already exists"
+              else
+                createdb scopeweaver
+                echo "database scopeweaver created"
+              fi
+      containers:
+        - name: scopeweaver
+          image: ghcr.io/cskwork/scopeweaver:v0.7.0
+          args:
+            - -addr
+            - :8787
+            - -proxy
+            - :8788
+          envFrom:
+            - secretRef:
+                name: scopeweaver
+          ports:
+            - name: http
+              containerPort: 8787
+            - name: proxy
+              containerPort: 8788
+          resources:
+            requests:
+              memory: 2Gi
+            limits:
+              memory: 2Gi
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data
+          hostPath:
+            path: /srv/scopeweaver/data
+            type: DirectoryOrCreate
