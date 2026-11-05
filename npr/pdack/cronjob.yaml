@@ -5,6 +5,7 @@ metadata:
   name: pdack
 spec:
   schedule: "*/2 * * * *"
+  suspend: true
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
