@@ -9,7 +9,6 @@ spec:
       kind: Gateway
       name: http
       namespace: nginx-gateway
-      sectionName: http
   hostnames:
     - file.zasda.id
   rules:

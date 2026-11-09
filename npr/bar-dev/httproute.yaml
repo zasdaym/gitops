@@ -8,7 +8,6 @@ spec:
       kind: Gateway
       name: http
       namespace: nginx-gateway
-      sectionName: http
   hostnames:
     - bar-dev.zasda.id
   rules:
