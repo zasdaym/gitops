@@ -11,7 +11,7 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 256Mi
+        memory: 64Mi
       limits:
         memory: 1Gi
   vmselect:
@@ -19,7 +19,7 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 256Mi
+        memory: 64Mi
       limits:
         memory: 1Gi
   vmstorage:
