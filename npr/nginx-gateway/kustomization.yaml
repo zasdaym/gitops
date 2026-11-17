@@ -13,7 +13,6 @@ helmCharts:
 patches:
   - target:
       kind: CustomResourceDefinition
-      name: .*\.gateway\.networking\.k8s\.io
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-options
