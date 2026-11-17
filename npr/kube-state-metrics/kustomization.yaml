@@ -4,7 +4,7 @@ resources:
 helmCharts:
   - name: kube-state-metrics
     repo: oci://ghcr.io/prometheus-community/charts
-    version: 6.3.0
+    version: 9.0.1
     releaseName: kube-state-metrics
     namespace: kube-state-metrics
     includeCRDs: true
