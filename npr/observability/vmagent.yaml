@@ -4,6 +4,7 @@ metadata:
   name: vmagent
 spec:
   replicaCount: 1
+  selectAllByDefault: true
   scrapeInterval: 30s
   scrapeTimeout: 10s
   nodeScrapeSelector:

@@ -1,6 +1,7 @@
 namespace: kube-state-metrics
 resources:
   - namespace.yaml
+  - vmservicescrape.yaml
 helmCharts:
   - name: kube-state-metrics
     repo: oci://ghcr.io/prometheus-community/charts
