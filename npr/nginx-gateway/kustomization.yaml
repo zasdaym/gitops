@@ -5,8 +5,16 @@ resources:
 helmCharts:
   - name: nginx-gateway-fabric
     repo: oci://ghcr.io/nginx/charts
-    version: 2.0.2
+    version: 2.8.1
     releaseName: nginx-gateway
     namespace: nginx-gateway
     includeCRDs: true
     valuesFile: values.yaml
+patches:
+  - target:
+      kind: CustomResourceDefinition
+      name: .*\.gateway\.networking\.k8s\.io
+    patch: |-
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1sync-options
+        value: ServerSideApply=true

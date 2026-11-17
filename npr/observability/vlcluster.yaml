@@ -3,7 +3,7 @@ kind: VLCluster
 metadata:
   name: victorialogs
 spec:
-  clusterVersion: v1.52.0
+  clusterVersion: v1.54.0
   useStrictSecurity: false
   vlinsert:
     replicaCount: 1

@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: caddy
-          image: caddy:2.11.4
+          image: caddy:2.11.9
           args:
             - caddy
             - file-server

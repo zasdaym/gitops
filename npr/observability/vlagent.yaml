@@ -5,7 +5,7 @@ metadata:
 spec:
   image:
     repository: victoriametrics/vlagent
-    tag: v1.52.0
+    tag: v1.54.0
   k8sCollector:
     enabled: true
     excludeFilter: kubernetes.pod_name:=%{POD_NAME}
