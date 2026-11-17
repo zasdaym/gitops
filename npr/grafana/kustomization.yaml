@@ -6,6 +6,9 @@ labels:
       app: grafana
 resources:
   - namespace.yaml
+  - password.yaml
+  - pushsecret.yaml
+  - externalsecret.yaml
   - deployment.yaml
   - service.yaml
   - httproute.yaml
